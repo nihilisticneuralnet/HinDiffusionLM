@@ -2,9 +2,6 @@
 
 This project turns BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi (trained on Kaggle GPU T4*2).
 
-
-An experiment in fine-tuning pre-trained BERT-based model into a  dLLM  with a variable masking ratio on instruction data trained on kaggle gpu t4*2.
-
 ## 🏗️ Architecture
 
 ```mermaid

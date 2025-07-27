@@ -100,7 +100,7 @@ print(response)
 | Dataset | Subset | Status | Notes |
 |---------|--------|--------|-------|
 | `ai4bharat/indic-instruct-data-v0.1` | `anudesh` | **Used** | Primary dataset for demonstration |
-| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | Skipped | Too time-intensive for training |
+| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | Skipped | Too time-intensive for training & hardware constraints|
 
 
 ### Hyperparameter Tuning

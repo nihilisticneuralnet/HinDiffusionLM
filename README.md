@@ -3,44 +3,12 @@
 
 This project turns BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi (trained on Kaggle GPU T4*2).
 
-## Architecture
+## LLaDA overview
 
-```mermaid
-graph TD
-    A[Input: Hindi Instruction] --> B[Tokenization]
-    B --> C[Add Special Tokens]
-    C --> D[CLS + User Query + SEP + Assistant + MASK tokens + SEP]
-    D --> E[Fine-tuned MURIL Model]
-    E --> F[Masked Language Head]
-    F --> G[Logits for Vocabulary]
-    G --> H[Iterative Denoising]
-    H --> I{All tokens unmasked?}
-    I -->|No| J[Select highest confidence MASK]
-    J --> K[Replace with predicted token]
-    K --> H
-    I -->|Yes| L[Final Hindi Response]
-    
-    subgraph "Training Process"
-        M[Hindi Instruction Dataset] --> N[Random Masking 15-99%]
-        N --> O[Assistant Response Masking]
-        O --> P[MLM Loss Computation]
-        P --> Q[Gradient Accumulation]
-        Q --> R[Model Update]
-    end
-    
-    subgraph "Generation Process"
-        S[User Query] --> T[Format with Special Tokens]
-        T --> U[Initialize with MASK tokens]
-        U --> V[Forward Pass]
-        V --> W[Confidence-based Token Selection]
-        W --> X[Iterative Unmasking]
-        X --> Y[Complete Response]
-    end
-```
+<img width="1251" height="364" alt="image" src="https://github.com/user-attachments/assets/c04a1aca-9046-42cf-9ffb-8d28df7205d2" />
 
 
 ## Quick Start
-
 
 ### Model Usage
 
@@ -127,3 +95,5 @@ accumulation_steps = 4          # Gradient accumulation
   - [Indic BERT](https://huggingface.co/ai4bharat/indic-bert)
 - Dataset
   - [Indic Instruct](https://huggingface.co/datasets/ai4bharat/indic-instruct-data-v0.1)
+ 
+- LINK TO BE GIVNE FOR HF MDEL LINK

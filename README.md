@@ -34,17 +34,6 @@ Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hin
 </p>
 
 
-```python
-# Adjustable parameters
-max_len = 256                    # Sequence length
-mask_ratio_min = 0.10           # Minimum masking ratio
-mask_ratio_max = 0.80           # Maximum masking ratio
-learning_rate = 1e-4            # Learning rate
-batch_size = 8                  # Per-device batch size
-accumulation_steps = 4          # Gradient accumulation
-```
-
-
 ## References
 
 - Training and Inference code was forked from [DataScienceCastnet](https://www.youtube.com/watch?v=Ds_cTclxV2o)

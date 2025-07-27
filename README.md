@@ -1,14 +1,9 @@
 # HinDiffusion Language Model
 
-A masked language model fine-tuned for Hindi instruction-following using diffusion-based text generation
-
-## Overview
-
-This project fine-tunes pre-trained BERT-based models on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi.
+This project turns BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi (trained on Kaggle GPU T4*2).
 
 
-Turning ModernBERT into an instruct-tuned Diffusion LLM
-An experiment in adapting ModernBERT into a LLADA-style dLLM by fine-tuning it with a variable masking ratio on instruction data.
+An experiment in fine-tuning pre-trained BERT-based model into a  dLLM  with a variable masking ratio on instruction data trained on kaggle gpu t4*2.
 
 ## 🏗️ Architecture
 
@@ -55,7 +50,7 @@ graph TD
 from transformers import AutoTokenizer, AutoModelForMaskedLM
 import torch
 
-model_id = "username/hindiffusion"
+model_id = "nihilisticneuralnet/hindiffusion"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 model = AutoModelForMaskedLM.from_pretrained(model_id)
 
@@ -107,58 +102,21 @@ print(response)
 
 | Dataset | Subset | Status | Notes |
 |---------|--------|--------|-------|
-| `ai4bharat/indic-instruct-data-v0.1` | `anudesh` | ✅ **Used** | Primary dataset for demonstration |
-| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | ⚠️ Skipped | Too time-intensive for training |
-
-### Training Configuration
-
-```yaml
-Model: google/muril-base-cased
-Dataset: ai4bharat/indic-instruct-data-v0.1 (anudesh subset)
-Hardware: Kaggle T4 x2 GPUs
-Batch Size: 4 (with 8x gradient accumulation)
-Effective Batch Size: 32
-Learning Rate: 2e-4
-Max Sequence Length: 256
-Masking Ratio: 15-99% (random)
-Training Duration: 1 epoch
-Memory Optimizations:
-  - Gradient checkpointing
-  - bfloat16 precision
-  - Gradient accumulation
-  - Subset sampling (10k examples)
-```
-
-
-
+| `ai4bharat/indic-instruct-data-v0.1` | `anudesh` | **Used** | Primary dataset for demonstration |
+| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | Skipped | Too time-intensive for training |
 
 
 ### Hyperparameter Tuning
 
 ```python
 # Adjustable parameters
-max_len = 512                    # Sequence length
+max_len = 256                    # Sequence length
 mask_ratio_min = 0.10           # Minimum masking ratio
 mask_ratio_max = 0.80           # Maximum masking ratio
 learning_rate = 1e-4            # Learning rate
 batch_size = 8                  # Per-device batch size
 accumulation_steps = 4          # Gradient accumulation
 ```
-
-
-
-## 🙏 Acknowledgments
-
-- **AI4Bharat** for the Hindi instruction dataset
-- **Google Research** for the MURIL model
-- **Hugging Face** for the transformers library
-- **Kaggle** for providing free GPU resources
-
-## 🔗 Links
-
-- **Model on Hugging Face**: `mnkbcs22021/modernbert-diffusion`
-- **Dataset**: `ai4bharat/indic-instruct-data-v0.1`
-- **Base Model**: `google/muril-base-cased`
 
 
 ## References

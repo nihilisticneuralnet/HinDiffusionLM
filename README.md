@@ -4,53 +4,7 @@ Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hin
 
 ## LLaDA overview
 
-<img width="1251" height="364" alt="image" src="https://github.com/user-attachments/assets/c04a1aca-9046-42cf-9ffb-8d28df7205d2" />
-
-
-## Quick Start
-
-### Model Usage
-
-```python
-from transformers import AutoTokenizer, AutoModelForMaskedLM
-import torch
-
-model_id = "nihilisticneuralnet/hindiffusion"
-tokenizer = AutoTokenizer.from_pretrained(model_id)
-model = AutoModelForMaskedLM.from_pretrained(model_id)
-
-def generate_hindi_response(question, max_length=32):
-    prompt = f"User: {question} {tokenizer.sep_token} Assistant:"
-    prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
-    
-    # Initialize with MASK tokens
-    ids = ([tokenizer.cls_token_id] + prompt_ids + 
-           [tokenizer.sep_token_id] + [tokenizer.mask_token_id] * max_length + 
-           [tokenizer.sep_token_id])
-    
-    # Iterative denoising
-    with torch.no_grad():
-        for i in range(max_length):
-            logits = model(input_ids=torch.tensor([ids])).logits
-            probs = torch.softmax(logits[0], dim=-1)
-            
-            # Find MASK positions
-            mask_positions = [j for j, token_id in enumerate(ids) 
-                            if token_id == tokenizer.mask_token_id]
-            if not mask_positions:
-                break
-                
-            # Select highest confidence prediction
-            best_pos = max(mask_positions, 
-                          key=lambda pos: probs[pos].max().item())
-            ids[best_pos] = probs[best_pos].argmax().item()
-    
-    return tokenizer.decode(ids, skip_special_tokens=True)
-
-# Example usage
-response = generate_hindi_response("भारत की राजधानी क्या है?")
-print(response)
-```
+<img width="1583" height="651" alt="image" src="https://github.com/user-attachments/assets/a37a719f-454a-4282-9841-6048fbdd6382" />
 
 
 ## Experiments

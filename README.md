@@ -1,8 +1,9 @@
-# HinDiffusion Language Model
+# HinDiffusion: Diffusion Language Model for Hindi Language
+
 
 This project turns BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi (trained on Kaggle GPU T4*2).
 
-## 🏗️ Architecture
+## Architecture
 
 ```mermaid
 graph TD

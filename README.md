@@ -2,9 +2,13 @@
 
 A masked language model fine-tuned for Hindi instruction-following using diffusion-based text generation
 
-## 🎯 Overview
+## Overview
 
 This project fine-tunes pre-trained BERT-based models on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi.
+
+
+Turning ModernBERT into an instruct-tuned Diffusion LLM
+An experiment in adapting ModernBERT into a LLADA-style dLLM by fine-tuning it with a variable masking ratio on instruction data.
 
 ## 🏗️ Architecture
 
@@ -41,22 +45,9 @@ graph TD
     end
 ```
 
-## ✨ Features
 
-- **Hindi Language Support**: Specialized for Hindi instruction-following tasks
-- **Diffusion-based Generation**: Novel iterative denoising approach for text generation
-- **Memory Optimized Training**: Gradient accumulation and checkpointing for efficient training
-- **Interactive Demo**: Gradio-based web interface with real-time visualization
-- **Flexible Architecture**: Easy to adapt for different languages and datasets
+## Quick Start
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-```bash
-pip install torch transformers datasets accelerate
-pip install gradio tqdm numpy
-```
 
 ### Model Usage
 
@@ -64,12 +55,10 @@ pip install gradio tqdm numpy
 from transformers import AutoTokenizer, AutoModelForMaskedLM
 import torch
 
-# Load the model
-model_id = "mnkbcs22021/modernbert-diffusion"
+model_id = "username/hindiffusion"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 model = AutoModelForMaskedLM.from_pretrained(model_id)
 
-# Generation function
 def generate_hindi_response(question, max_length=32):
     prompt = f"User: {question} {tokenizer.sep_token} Assistant:"
     prompt_ids = tokenizer.encode(prompt, add_special_tokens=False)
@@ -104,22 +93,22 @@ print(response)
 ```
 
 
-## 📊 Experiments
+## Experiments
 
 ### Models Evaluated
 
-| Model | Performance | Status | Notes |
-|-------|-------------|--------|-------|
-| `google/muril-base-cased` | ✅ **Best** | Working | Optimal balance of performance and efficiency |
-| `google/muril-large-cased` | ❌ Poor | Failed | Memory constraints, slower convergence |
-| `ai4bharat/indic-bert` | ⚠️ Moderate | Partial | Decent but inferior to MURIL-base |
+| Model | Performance | 
+|-------|-------------|
+| `google/muril-base-cased` | **Best** |
+| `google/muril-large-cased` | Poor |
+| `ai4bharat/indic-bert` | Moderate |
 
 ### Datasets Tested
 
-| Dataset | Subset | Status | Training Time | Notes |
-|---------|--------|--------|---------------|-------|
-| `ai4bharat/indic-instruct-data-v0.1` | `anudesh` | ✅ **Used** | ~2 hours | Primary dataset for demonstration |
-| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | ⚠️ Skipped | >8 hours | Too time-intensive for demo |
+| Dataset | Subset | Status | Notes |
+|---------|--------|--------|-------|
+| `ai4bharat/indic-instruct-data-v0.1` | `anudesh` | ✅ **Used** | Primary dataset for demonstration |
+| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | ⚠️ Skipped | Too time-intensive for training |
 
 ### Training Configuration
 
@@ -170,3 +159,15 @@ accumulation_steps = 4          # Gradient accumulation
 - **Model on Hugging Face**: `mnkbcs22021/modernbert-diffusion`
 - **Dataset**: `ai4bharat/indic-instruct-data-v0.1`
 - **Base Model**: `google/muril-base-cased`
+
+
+## References
+
+- Training and Inference code was forked from [DataScienceCastnet](https://www.youtube.com/watch?v=Ds_cTclxV2o)
+- Gradio Interface codebase was forked from [LLaDA](https://github.com/ML-GSAI/LLaDA/blob/main/app.py)
+- Models
+  - [MuRIL base](https://huggingface.co/google/muril-base-cased)
+  - [MuRIL large](https://huggingface.co/google/muril-large-cased)
+  - [Indic BERT](https://huggingface.co/ai4bharat/indic-bert)
+- Dataset
+  - [Indic Instruct](https://huggingface.co/datasets/ai4bharat/indic-instruct-data-v0.1)

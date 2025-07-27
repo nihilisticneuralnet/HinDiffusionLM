@@ -25,7 +25,14 @@ Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hin
 | `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | Skipped | Too time-intensive for training & hardware constraints|
 
 
-### Hyperparameter Tuning
+### Example Demo
+
+<p align="center">
+  <img src="/outputs/3.gif" />
+  <img src="/outputs/1.gif" />
+<!--   <img src="/outputs/2.gif" /> -->
+</p>
+
 
 ```python
 # Adjustable parameters

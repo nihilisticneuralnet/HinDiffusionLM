@@ -1,6 +1,6 @@
 # HinDiffusionLM: Diffusion Language Model for Hindi Language
 
-Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi (trained on Kaggle GPU T4*2).
+Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hindi instruction data using a masked language modeling approach with diffusion-style generation. The model learns to iteratively denoise masked tokens to generate coherent responses in Hindi.
 
 ## LLaDA overview
 
@@ -22,8 +22,14 @@ Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hin
 | Dataset | Subset | Status | Notes |
 |---------|--------|--------|-------|
 | `ai4bharat/indic-instruct-data-v0.1` | `anudesh` | **Used** | Primary dataset for demonstration |
-| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | Skipped | Too time-intensive for training & hardware constraints|
+| `ai4bharat/indic-instruct-data-v0.1` | `lm_sys` | Skipped | Too time-intensive for training & GPU constraints|
 
+
+### Plots
+
+<p align="center">
+  <img src="/outputs/plots.png" />
+</p>
 
 ### Example Demo
 
@@ -32,6 +38,7 @@ Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hin
   <img src="/outputs/1.gif" />
 <!--   <img src="/outputs/2.gif" /> -->
 </p>
+
 
 
 ## References
@@ -44,5 +51,5 @@ Turning BERT-based model into an instruct-tuned LLADA-style Diffusion LLM on Hin
   - [Indic BERT](https://huggingface.co/ai4bharat/indic-bert)
 - Dataset
   - [Indic Instruct](https://huggingface.co/datasets/ai4bharat/indic-instruct-data-v0.1)
+- [HinDiffusionLM on HF](https://huggingface.co/nihilisticneuralnet/HinDiffusionLM) (trained on Kaggle GPU T4*2)
  
-- LINK TO BE GIVNE FOR HF MDEL LINK
